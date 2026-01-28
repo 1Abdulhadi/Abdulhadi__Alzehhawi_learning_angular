@@ -1,6 +1,3 @@
 <div>
-  <app-car-list-item [car]="carsList[0]"></app-car-list-item>
-  <app-car-list-item [car]="carsList[1]"></app-car-list-item>
-  <app-car-list-item [car]="carsList[2]"></app-car-list-item>
-  <app-car-list-item [car]="carsList[3]"></app-car-list-item>
+  <app-car-list-item *ngFor="let car of carsList" [car]="car"></app-car-list-item>
 </div>

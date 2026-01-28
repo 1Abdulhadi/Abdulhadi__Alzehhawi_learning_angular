@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { CarsComponent } from './cars.component';
+import { CarListComponent } from './car.list/car.list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CarsComponent],
+  imports: [CarListComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+  title = 'Car Management System';
 }
