@@ -1,1 +1,7 @@
-<p>car.list.item works!</p>
+<div *ngIf="car">
+  <h2>{{ car.name }}</h2>
+  <p><strong>ID:</strong> {{ car.id }}</p>
+  <p><strong>Company:</strong> {{ car.company }}</p>
+  <p><strong>Year:</strong> {{ car.year }}</p>
+  <p><strong>Electric:</strong> {{ car.electric ? 'Yes' : 'No' }}</p>
+</div>
