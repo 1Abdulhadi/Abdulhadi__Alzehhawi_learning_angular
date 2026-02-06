@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Cars } from '../cars';
 import { CarListItemComponent } from '../car.list.item/car.list.item.component';
+import { CarService } from '../services/car.service';
 
 @Component({
   selector: 'app-car-list',
@@ -20,4 +21,6 @@ export class CarListComponent {
     { id: 6, name: "Accord", company: "Honda", year: 2020, electric: false },
     { id: 7, name: "GT-R", company: "Nissan", year: 2024, electric: false }
   ];
+
+  constructor(private carService: CarService) { }
 }
