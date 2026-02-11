@@ -1,6 +1,13 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { provideRouter, Routes } from '@angular/router';
 import { App } from './app/app';
+import { CarListComponent } from './app/car.list/car.list.component';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+const routes: Routes = [
+  { path: '', redirectTo: '/cars', pathMatch: 'full' },
+  { path: 'cars', component: CarListComponent }
+];
+
+bootstrapApplication(App, {
+  providers: [provideRouter(routes)]
+}).catch((err) => console.error(err));
