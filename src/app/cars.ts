@@ -4,4 +4,5 @@ export interface Cars {
   company: string;
   year: number;
   electric?: boolean;
+  imageUrl?: string;
 }

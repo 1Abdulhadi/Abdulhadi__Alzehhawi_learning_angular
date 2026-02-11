@@ -1,4 +1,5 @@
 <div *ngIf="car">
+  <img *ngIf="car.imageUrl" [src]="car.imageUrl" [alt]="car.name" style="max-width: 300px; border-radius: 8px;">
   <h2>{{ car.name }}</h2>
   <p><strong>ID:</strong> {{ car.id }}</p>
   <p><strong>Company:</strong> {{ car.company }}</p>

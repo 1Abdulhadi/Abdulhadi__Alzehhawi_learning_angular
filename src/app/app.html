@@ -1,2 +1,12 @@
-<app-car-list-item [car]="selectedCar"></app-car-list-item>
-<app-car-list></app-car-list>
+<div class="nav-bar">
+  <nav>
+    <ul>
+      <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/modify-cars" routerLinkActive="active">Modify Cars</a></li>
+    </ul>
+  </nav>
+</div>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
