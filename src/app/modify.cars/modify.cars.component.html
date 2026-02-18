@@ -1,1 +1,23 @@
-<p>modify.cars works!</p>
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+  <label for="id">ID</label>
+  <input id="id" formControlName="id" type="number" />
+
+  <label for="name">Name</label>
+  <input id="name" formControlName="name" type="text" />
+
+  <label for="company">Company</label>
+  <input id="company" formControlName="company" type="text" />
+
+  <label for="year">Year</label>
+  <input id="year" formControlName="year" type="number" />
+
+  <label for="electric">Electric</label>
+  <input id="electric" formControlName="electric" type="checkbox" />
+
+  <label for="imageUrl">Image URL</label>
+  <input id="imageUrl" formControlName="imageUrl" type="text" />
+
+  <button type="submit">Submit</button>
+  <button type="button" (click)="carForm.reset()">Reset</button>
+  <button type="button" (click)="navigateToCarList()">Back to List</button>
+</form>

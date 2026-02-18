@@ -1,3 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment 3</title>
+</head>
+<body>
 <div>
-  <app-car-list-item *ngFor="let car of carsList" [car]="car"></app-car-list-item>
+  <table>
+    <tbody>
+    <tr *ngFor="let car of carsList; let i = index"
+        [ngClass]="{'even-item': i % 2 === 0, 'odd-item': i % 2 !== 0}">
+      <td>
+        <app-car-list-item [car]="car"></app-car-list-item>
+      </td>
+      <td>
+        <button (click)="onDelete(car.id)">Delete</button>
+        <button (click)="onEdit(car.id)">Edit</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
+</body>
+
+</html>

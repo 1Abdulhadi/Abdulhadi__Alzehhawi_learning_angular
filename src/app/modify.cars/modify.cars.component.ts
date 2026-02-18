@@ -1,11 +1,65 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { NgIf } from "@angular/common";
+import { Cars } from '../cars';
+import { CarService } from '../services/car.service';
 
 @Component({
-  selector: 'app-modify.cars',
-  imports: [],
+  selector: 'app-modify-cars',
+  standalone: true,
+  imports: [
+    FormsModule,
+    NgIf,
+    ReactiveFormsModule
+  ],
   templateUrl: './modify.cars.component.html',
-  styleUrl: './modify.cars.component.css',
+  styleUrls: ['./modify.cars.component.css']
 })
-export class ModifyCarsComponent {
+export class ModifyCarsComponent implements OnInit {
+  carForm: FormGroup;
+  car: Cars | undefined;
 
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private carService: CarService,
+    private router: Router
+  ) {
+    this.carForm = this.fb.group({
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      company: ['', Validators.required],
+      year: ['', Validators.required],
+      electric: [false],
+      imageUrl: ['']
+    });
+  }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.carService.getCar(+id).subscribe(car => {
+        if (car) {
+          this.car = car;
+          this.carForm.patchValue(car);
+        }
+      });
+    }
+  }
+
+  onSubmit(): void {
+    const car: Cars = this.carForm.value;
+
+    if (car.id) {
+      this.carService.updateCar(car);
+    } else {
+      this.carService.createCar(car);
+    }
+    this.router.navigate(['/cars']);
+  }
+
+  navigateToCarList(): void {
+    this.router.navigate(['/cars']);
+  }
 }
