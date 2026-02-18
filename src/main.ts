@@ -8,6 +8,7 @@ import { ModifyCarsComponent } from './app/modify.cars/modify.cars.component';
 const routes: Routes = [
   { path: '', redirectTo: '/cars', pathMatch: 'full' },
   { path: 'cars', component: CarListComponent },
+  { path: 'modify-cars/:id', component: ModifyCarsComponent },
   { path: 'modify-cars', component: ModifyCarsComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

@@ -12,12 +12,12 @@
     <tbody>
     <tr *ngFor="let car of carsList; let i = index"
         [ngClass]="{'even-item': i % 2 === 0, 'odd-item': i % 2 !== 0}">
-      <td>
+      <td colspan="2">
         <app-car-list-item [car]="car"></app-car-list-item>
-      </td>
-      <td>
-        <button (click)="onDelete(car.id)">Delete</button>
-        <button (click)="onEdit(car.id)">Edit</button>
+        <div style="text-align: center; margin-top: 10px;">
+          <button (click)="onDelete(car.id)">Delete</button>
+          <button (click)="onEdit(car.id)">Edit</button>
+        </div>
       </td>
     </tr>
     </tbody>

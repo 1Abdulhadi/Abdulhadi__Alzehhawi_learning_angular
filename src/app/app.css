@@ -1,0 +1,12 @@
+a {
+  color: #0066cc;
+  text-decoration: none;
+  font-size: 18px;
+  margin-right: 15px;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #004499;
+  text-decoration: underline;
+}
