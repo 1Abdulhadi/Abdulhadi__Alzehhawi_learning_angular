@@ -12,6 +12,7 @@ import { CarService } from '../services/car.service';
   templateUrl: './car.list.component.html',
   styleUrls: ['./car.list.component.css']
 })
+
 export class CarListComponent implements OnInit {
   carsList: Cars[] = [];
   selectedCar?: Cars;
