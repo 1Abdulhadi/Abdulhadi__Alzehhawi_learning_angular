@@ -1,41 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Cars } from '../cars';
-import { CARS } from '../data/mock-content';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
-  private carsList: Cars[] = CARS;
+  private apiUrl = 'api/cars';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getCars(): Observable<Cars[]> {
-    return of(CARS);
+    return this.http.get<Cars[]>(this.apiUrl).pipe(catchError(this.handleError));
   }
 
   getCar(id: number): Observable<Cars | undefined> {
-    const car = this.carsList.find(c => c.id === id);
-    return of(car);
+    return this.http.get<Cars>(`${this.apiUrl}/${id}`).pipe(catchError(this.handleError));
   }
 
-  createCar(car: Cars): Observable<Cars[]> {
-    this.carsList.push(car);
-    return of(this.carsList);
+  createCar(car: Cars): Observable<Cars> {
+    return this.http.post<Cars>(this.apiUrl, car).pipe(catchError(this.handleError));
   }
 
-  updateCar(car: Cars): Observable<Cars[]> {
-    const index = this.carsList.findIndex(c => c.id === car.id);
-    if (index !== -1) {
-      this.carsList[index] = car;
-    }
-    return of(this.carsList);
+  updateCar(updatedCar: Cars): Observable<Cars | undefined> {
+    const url = `${this.apiUrl}/${updatedCar.id}`;
+    return this.http.put<Cars>(url, updatedCar).pipe(catchError(this.handleError));
   }
 
-  deleteCar(id: number): Observable<Cars[]> {
-    this.carsList = this.carsList.filter(c => c.id !== id);
-    return of(this.carsList);
+  deleteCar(id: number): Observable<void> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<void>(url).pipe(catchError(this.handleError));
   }
 
+  private handleError(error: HttpErrorResponse) {
+    console.error('API error:', error);
+    return throwError(() => new Error('Server error, please try again.'));
+  }
 }
