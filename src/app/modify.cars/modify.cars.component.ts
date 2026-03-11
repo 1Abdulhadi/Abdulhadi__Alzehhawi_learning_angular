@@ -19,6 +19,7 @@ import { CarService } from '../services/car.service';
 export class ModifyCarsComponent implements OnInit {
   carForm: FormGroup;
   car: Cars | undefined;
+  errorMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -39,10 +40,16 @@ export class ModifyCarsComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.carService.getCar(+id).subscribe(car => {
-        if (car) {
-          this.car = car;
-          this.carForm.patchValue(car);
+      this.carService.getCar(+id).subscribe({
+        next: (car) => {
+          if (car) {
+            this.car = car;
+            this.carForm.patchValue(car);
+          }
+        },
+        error: (err) => {
+          console.error("Error fetching car", err);
+          this.errorMessage = 'Failed to load car. Please try again.';
         }
       });
     }
@@ -52,11 +59,28 @@ export class ModifyCarsComponent implements OnInit {
     const car: Cars = this.carForm.value;
 
     if (car.id) {
-      this.carService.updateCar(car);
+      // Update  car
+      this.carService.updateCar(car).subscribe({
+        next: () => {
+          this.router.navigate(['/cars']);
+        },
+        error: (err) => {
+          console.error("Error updating car", err);
+          this.errorMessage = 'Failed to update car. Please try again.';
+        }
+      });
     } else {
-      this.carService.createCar(car);
+      // Create new car
+      this.carService.createCar(car).subscribe({
+        next: () => {
+          this.router.navigate(['/cars']);
+        },
+        error: (err) => {
+          console.error("Error creating car", err);
+          this.errorMessage = 'Failed to create car. Please try again.';
+        }
+      });
     }
-    this.router.navigate(['/cars']);
   }
 
   navigateToCarList(): void {
