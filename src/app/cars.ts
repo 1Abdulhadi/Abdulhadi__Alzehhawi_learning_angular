@@ -5,4 +5,6 @@ export interface Cars {
   year: number;
   electric?: boolean;
   imageUrl?: string;
+  price: number;
+  releaseDate: Date;
 }
