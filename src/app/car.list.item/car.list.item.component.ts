@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule, UpperCasePipe, CurrencyPipe, DatePipe } from '@angular/common';
 import { Cars } from '../cars';
 import { CarModelPipe } from '../pipes/car.model.pipe';
+import { HoverHighlightDirective } from '../directives/hover.highlight.directive';
 
 @Component({
   selector: 'app-car-list-item',
   standalone: true,
-  imports: [CommonModule, UpperCasePipe, CurrencyPipe, DatePipe, CarModelPipe],
+  imports: [CommonModule, UpperCasePipe, CurrencyPipe, DatePipe, CarModelPipe, HoverHighlightDirective],
   templateUrl: './car.list.item.component.html',
   styleUrls: ['./car.list.item.component.css']
 })
