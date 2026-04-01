@@ -1,27 +1,51 @@
-<div *ngIf="errorMessage" style="color: red; padding: 10px; margin: 10px 0; border: 1px solid red; background-color: #ffe6e6;">
-  {{ errorMessage }}
-</div>
+<h2>{{ car ? 'Edit Car' : 'Add New Car' }}</h2>
 
 <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
-  <label for="id">ID</label>
-  <input id="id" formControlName="id" type="number" />
+  <div>
+    <label for="id">ID:</label>
+    <input id="id" [appHighlightOnFocus]="'lightyellow'" formControlName="id" type="number" />
+  </div>
 
-  <label for="name">Name</label>
-  <input id="name" formControlName="name" type="text" />
+  <div>
+    <label for="name">Name:</label>
+    <input id="name" [appHighlightOnFocus]="'lightyellow'" formControlName="name" type="text" />
+  </div>
 
-  <label for="company">Company</label>
-  <input id="company" formControlName="company" type="text" />
+  <div>
+    <label for="company">Company:</label>
+    <input id="company" [appHighlightOnFocus]="'lightyellow'" formControlName="company" type="text" />
+  </div>
 
-  <label for="year">Year</label>
-  <input id="year" formControlName="year" type="number" />
+  <div>
+    <label for="year">Year:</label>
+    <input id="year" [appHighlightOnFocus]="'lightyellow'" formControlName="year" type="number" />
+  </div>
 
-  <label for="electric">Electric</label>
-  <input id="electric" formControlName="electric" type="checkbox" />
+  <div>
+    <label for="price">Price:</label>
+    <input id="price" [appHighlightOnFocus]="'lightyellow'" formControlName="price" type="number" />
+  </div>
 
-  <label for="imageUrl">Image URL</label>
-  <input id="imageUrl" formControlName="imageUrl" type="text" />
+  <div>
+    <label for="releaseDate">Release Date:</label>
+    <input id="releaseDate" [appHighlightOnFocus]="'lightyellow'" formControlName="releaseDate" type="date" />
+  </div>
+
+  <div>
+    <label for="imageUrl">Image URL:</label>
+    <input id="imageUrl" [appHighlightOnFocus]="'lightyellow'" formControlName="imageUrl" type="text" />
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" formControlName="electric" />
+      Electric
+    </label>
+  </div>
+
+  <div *ngIf="errorMessage" style="color: red;">
+    {{ errorMessage }}
+  </div>
 
   <button type="submit">Submit</button>
-  <button type="button" (click)="carForm.reset()">Reset</button>
-  <button type="button" (click)="navigateToCarList()">Back to List</button>
 </form>

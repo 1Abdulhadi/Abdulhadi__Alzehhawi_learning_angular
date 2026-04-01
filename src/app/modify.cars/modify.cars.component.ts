@@ -1,31 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { NgIf } from "@angular/common";
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Cars } from '../cars';
 import { CarService } from '../services/car.service';
+import { HighlightOnFocusDirective } from '../directives/highlight.on.focus.directive';
 
 @Component({
   selector: 'app-modify-cars',
   standalone: true,
-  imports: [
-    FormsModule,
-    NgIf,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, HighlightOnFocusDirective],
   templateUrl: './modify.cars.component.html',
   styleUrls: ['./modify.cars.component.css']
 })
 export class ModifyCarsComponent implements OnInit {
   carForm: FormGroup;
   car: Cars | undefined;
-  errorMessage: string = '';
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private carService: CarService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.carForm = this.fb.group({
       id: ['', Validators.required],
@@ -33,14 +30,16 @@ export class ModifyCarsComponent implements OnInit {
       company: ['', Validators.required],
       year: ['', Validators.required],
       electric: [false],
-      imageUrl: ['']
+      imageUrl: [''],
+      price: ['', Validators.required],
+      releaseDate: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.carService.getCar(+id).subscribe({
+    const carId = this.route.snapshot.paramMap.get('id');
+    if (carId) {
+      this.carService.getCar(+carId).subscribe({
         next: (car) => {
           if (car) {
             this.car = car;
@@ -48,7 +47,7 @@ export class ModifyCarsComponent implements OnInit {
           }
         },
         error: (err) => {
-          console.error("Error fetching car", err);
+          console.error('Error fetching car', err);
           this.errorMessage = 'Failed to load car. Please try again.';
         }
       });
@@ -56,34 +55,29 @@ export class ModifyCarsComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const car: Cars = this.carForm.value;
-
-    if (car.id) {
-      // Update  car
-      this.carService.updateCar(car).subscribe({
-        next: () => {
-          this.router.navigate(['/cars']);
-        },
-        error: (err) => {
-          console.error("Error updating car", err);
-          this.errorMessage = 'Failed to update car. Please try again.';
-        }
-      });
-    } else {
-      // Create new car
-      this.carService.createCar(car).subscribe({
-        next: () => {
-          this.router.navigate(['/cars']);
-        },
-        error: (err) => {
-          console.error("Error creating car", err);
-          this.errorMessage = 'Failed to create car. Please try again.';
-        }
-      });
+    if (this.carForm.valid) {
+      const formValue = this.carForm.value;
+      if (this.car && this.car.id) {
+        this.carService.updateCar(formValue).subscribe({
+          next: () => {
+            this.router.navigate(['/cars']);
+          },
+          error: (err) => {
+            console.error('Error updating car', err);
+            this.errorMessage = 'Failed to update car. Please try again.';
+          }
+        });
+      } else {
+        this.carService.createCar(formValue).subscribe({
+          next: () => {
+            this.router.navigate(['/cars']);
+          },
+          error: (err) => {
+            console.error('Error creating car', err);
+            this.errorMessage = 'Failed to create car. Please try again.';
+          }
+        });
+      }
     }
-  }
-
-  navigateToCarList(): void {
-    this.router.navigate(['/cars']);
   }
 }
