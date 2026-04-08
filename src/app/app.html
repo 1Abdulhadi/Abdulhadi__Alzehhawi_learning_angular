@@ -1,11 +1,8 @@
-<div class="nav-bar">
-  <nav>
-    <ul>
-      <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/modify-cars" routerLinkActive="active">Modify Cars</a></li>
-    </ul>
-  </nav>
-</div>
+<mat-toolbar color="primary">
+  <span>Car Management System</span>
+  <button mat-button routerLink="/cars" routerLinkActive="active">Car List</button>
+  <button mat-button routerLink="/modify-cars" routerLinkActive="active">Modify Cars</button>
+</mat-toolbar>
 
 <div class="content">
   <router-outlet></router-outlet>

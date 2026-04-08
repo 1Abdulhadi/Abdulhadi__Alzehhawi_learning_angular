@@ -1,23 +1,4 @@
-:host {
-  display: block;
-  border: 2px solid #333;
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
-}
-
-:host:hover {
-  background-color: #77B1D4;
-}
-
-:host:nth-child(even) {
-  background-color: #dbeafe;
-}
-
-h2 {
-  margin-bottom: 10px;
-  color: #333;
-}
-
-p {
-  margin: 5px 0;
+.car-card {
+  margin: 1rem;
+  max-width: 400px;
 }

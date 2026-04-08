@@ -1,9 +1,19 @@
-<div *ngIf="car" [appHoverHighlight]="'lightblue'">
-  <img *ngIf="car.imageUrl" [src]="car.imageUrl" [alt]="car.name" style="max-width: 300px; border-radius: 8px;">
-  <h2>{{ car | carModel | uppercase }}</h2>
-  <p><strong>ID:</strong> {{ car.id }}</p>
-  <p><strong>Price:</strong> {{ car.price | currency: 'CAD': 'symbol-narrow' }}</p>
-  <p><strong>Year:</strong> {{ car.year }}</p>
-  <p><strong>Release Date:</strong> {{ car.releaseDate | date: 'fullDate' }}</p>
-  <p><strong>Electric:</strong> {{ car.electric ? 'Yes' : 'No' }}</p>
-</div>
+<mat-card *ngIf="car" [appHoverHighlight]="'lightblue'" class="car-card">
+  <mat-card-header>
+    <mat-card-title>{{ car | carModel | uppercase }}</mat-card-title>
+    <mat-card-subtitle>ID: {{ car.id }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <img *ngIf="car.imageUrl"
+       mat-card-image
+       [src]="car.imageUrl"
+       [alt]="car.name"
+       style="max-height: 200px; object-fit: cover;">
+
+  <mat-card-content>
+    <p><strong>Price:</strong> {{ car.price | currency: 'CAD': 'symbol-narrow' }}</p>
+    <p><strong>Year:</strong> {{ car.year }}</p>
+    <p><strong>Release Date:</strong> {{ car.releaseDate | date: 'fullDate' }}</p>
+    <p><strong>Electric:</strong> {{ car.electric ? 'Yes' : 'No' }}</p>
+  </mat-card-content>
+</mat-card>

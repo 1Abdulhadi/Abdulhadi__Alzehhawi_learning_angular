@@ -1,7 +1,6 @@
 {
   "name": "Abdulhadi__Alzehhawi_learning_angular",
   "version": "0.8.0",
-
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,10 +23,12 @@
   "private": true,
   "packageManager": "npm@11.6.2",
   "dependencies": {
+    "@angular/cdk": "^21.2.5",
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
     "@angular/core": "^21.0.0",
     "@angular/forms": "^21.0.0",
+    "@angular/material": "^21.2.5",
     "@angular/platform-browser": "^21.0.0",
     "@angular/router": "^21.0.0",
     "angular-in-memory-web-api": "^0.21.0",

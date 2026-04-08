@@ -1,51 +1,48 @@
 <h2>{{ car ? 'Edit Car' : 'Add New Car' }}</h2>
 
-<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="id">ID:</label>
-    <input id="id" [appHighlightOnFocus]="'lightyellow'" formControlName="id" type="number" />
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()" class="mat-form">
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>ID</mat-label>
+    <input matInput type="number" formControlName="id" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Company</mat-label>
+    <input matInput type="text" formControlName="company" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Year</mat-label>
+    <input matInput type="number" formControlName="year" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Price</mat-label>
+    <input matInput type="number" formControlName="price" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Release Date</mat-label>
+    <input matInput type="date" formControlName="releaseDate" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Image URL</mat-label>
+    <input matInput type="text" formControlName="imageUrl" />
+  </mat-form-field>
+
+  <mat-checkbox formControlName="electric" class="checkbox">Electric</mat-checkbox>
+
+  <div class="button-group">
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <button mat-button type="button" routerLink="/cars">Back to List</button>
   </div>
 
-  <div>
-    <label for="name">Name:</label>
-    <input id="name" [appHighlightOnFocus]="'lightyellow'" formControlName="name" type="text" />
-  </div>
-
-  <div>
-    <label for="company">Company:</label>
-    <input id="company" [appHighlightOnFocus]="'lightyellow'" formControlName="company" type="text" />
-  </div>
-
-  <div>
-    <label for="year">Year:</label>
-    <input id="year" [appHighlightOnFocus]="'lightyellow'" formControlName="year" type="number" />
-  </div>
-
-  <div>
-    <label for="price">Price:</label>
-    <input id="price" [appHighlightOnFocus]="'lightyellow'" formControlName="price" type="number" />
-  </div>
-
-  <div>
-    <label for="releaseDate">Release Date:</label>
-    <input id="releaseDate" [appHighlightOnFocus]="'lightyellow'" formControlName="releaseDate" type="date" />
-  </div>
-
-  <div>
-    <label for="imageUrl">Image URL:</label>
-    <input id="imageUrl" [appHighlightOnFocus]="'lightyellow'" formControlName="imageUrl" type="text" />
-  </div>
-
-  <div>
-    <label>
-      <input type="checkbox" formControlName="electric" />
-      Electric
-    </label>
-  </div>
-
-  <div *ngIf="errorMessage" style="color: red;">
-    {{ errorMessage }}
-  </div>
-
-  <button type="submit">Submit</button>
+  <div *ngIf="errorMessage" class="mat-error">{{ errorMessage }}</div>
 </form>
